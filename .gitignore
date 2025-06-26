@@ -26,9 +26,9 @@ yarn-error.log*
 .DS_Store
 
 # Build output
-dist/
-build/
-*.map
+# dist/
+# build/
+# *.map
 
 # Test coverage reports
 coverage/
