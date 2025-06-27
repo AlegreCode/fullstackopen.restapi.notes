@@ -27,6 +27,9 @@ let notes = [
   }
 ]
 
+const run = require('./db/connect');
+run();
+
 app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
 })
