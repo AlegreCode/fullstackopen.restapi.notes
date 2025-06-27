@@ -15,11 +15,10 @@ async function run() {
     // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
     await mongoose.connect(uri, clientOptions);
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await mongoose.disconnect();
+  } catch (error) {
+    console.error(error);
   }
 }
-// run().catch(console.dir);
+run().catch(console.dir);
 
-module.exports = run;
+// module.exports = run;
