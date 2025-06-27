@@ -1,12 +1,12 @@
 
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 
-if (process.env.MODE === 'development') {
-    dotenv.config();
+if (process.env.NODE_ENV === 'development') {
+    require('dotenv').config();
+    console.log('Development mode');
 }
 
-const uri = `mongodb+srv://caalegre269:${process.env.DB_PASSWORD}@cluster0.1finlsi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = process.env.MONGODB_URI;
 
 const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
 
@@ -14,13 +14,12 @@ async function run() {
   try {
     // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
     await mongoose.connect(uri, clientOptions);
-    await mongoose.connection.db.admin().command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
     await mongoose.disconnect();
   }
 }
-run().catch(console.dir);
+// run().catch(console.dir);
 
 module.exports = run;
