@@ -44,6 +44,14 @@ app.get('/api/notes/:id', (request, response) => {
     })
 })
 
+app.put('/api/notes/:id', (request, response) => {
+    const id = request.params.id
+    const body = request.body
+    Note.findByIdAndUpdate(id, body, { new: true }).then(note => {
+        response.json(note)
+    })
+})
+
 app.delete('/api/notes/:id', (request, response) => {
     const id = request.params.id
     Note.findByIdAndDelete(id).then(() => {
